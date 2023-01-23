@@ -4,7 +4,6 @@ import Form from './Form';
 import axios from 'axios'
 
 
-
 function MyApp() {
 
   useEffect(() => {
@@ -25,7 +24,8 @@ function MyApp() {
   function updateList(person) { 
     makePostCall(person).then( result => {
     if (result && result.status === 201)
-       setCharacters([...characters, person] );
+      person = result.data;
+      setCharacters([...characters, person] );
     });
  }
 
@@ -44,7 +44,7 @@ function MyApp() {
    catch (error){
       //We're not handling errors. Just logging into the console.
       console.log(error); 
-      return false;         
+      return false;
    }
   }
 
@@ -58,6 +58,7 @@ function MyApp() {
        return false;
     }
  }
+ 
 
 
 }
