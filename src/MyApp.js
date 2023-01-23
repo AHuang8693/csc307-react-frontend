@@ -27,18 +27,17 @@ function MyApp() {
       person = result.data;
       setCharacters([...characters, person] );
     });
- }
+  }
 
   function removeOneCharacter (index) {
    makeDeleteCall(index).then( result => {
       if (result && result.status === 204) {
-         const updated = characters.filter((character, i) => { //-----
+         const updated = characters.filter((character, i) => {
             return i !== index
          });
          setCharacters(updated);
       }
-   });
-    
+   });  
   }
 
   async function fetchAll(){
@@ -75,9 +74,6 @@ function MyApp() {
       return false;
    }
  }
-
-
 }
-
 
 export default MyApp;
