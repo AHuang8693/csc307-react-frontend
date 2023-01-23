@@ -30,10 +30,15 @@ function MyApp() {
  }
 
   function removeOneCharacter (index) {
-    const updated = characters.filter((character, i) => {
-        return i !== index
-      });
-      setCharacters(updated);
+   makeDeleteCall(index).then( result => {
+      if (result && result.status === 204) {
+         const updated = characters.filter((character, i) => { //-----
+            return i !== index
+         });
+         setCharacters(updated);
+      }
+   });
+    
   }
 
   async function fetchAll(){
@@ -58,7 +63,18 @@ function MyApp() {
        return false;
     }
  }
- 
+
+ async function makeDeleteCall(index){
+   const id = characters.indexOf(index).id
+   try {
+      const response = await axios.delete('http://localhost:5000/users/' + id);
+      return response;
+   }
+   catch (error) {
+      console.log(error);
+      return false;
+   }
+ }
 
 
 }
